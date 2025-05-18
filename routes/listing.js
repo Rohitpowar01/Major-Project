@@ -44,19 +44,6 @@ router
 router.get('/:id/edit',isLoggedIn,isOwner,
     wrapAsync(listingController.renderEditForm));
 
-//Search Route
-router.get("/", async (req, res) => {
-  const { country } = req.query;
-  let listings;
-
-  if (country) {
-    listings = await Listing.find({ country: new RegExp(country, 'i') });
-  } else {
-    listings = await Listing.find({});
-  }
-
-  res.render("listings/index", { listings });
-});
 
 
 module.exports=router;
